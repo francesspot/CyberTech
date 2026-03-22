@@ -2,7 +2,6 @@
 
 
 ## Odtworzenie środowiska
-
 python -m venv .venv
 
 # Windows
@@ -11,4 +10,5 @@ python -m venv .venv
 # Linux/Mac
 source .venv/bin/activate
 
+## Instalacja bibliotek
 pip install -r requirements.txt
