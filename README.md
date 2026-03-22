@@ -1,4 +1,4 @@
-### Projekt AI do klasyfikacji śmieci na 6 kategorii na podstawie zdjeć
+# Projekt AI do klasyfikacji śmieci na 6 kategorii na podstawie zdjeć
 
 
 ## Odtworzenie środowiska
