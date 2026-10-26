@@ -1,56 +1,35 @@
-[Polski](README.md) | **English**
+🇵🇱 [Polski](README.md) | 🇬🇧 **English**
 
-# Waste Classification with AI
+# ♻️ Waste Classification from Photos
 
-A deep-learning model that sorts waste into **6 categories** based on a photo: `cardboard`, `glass`, `metal`, `paper`, `plastic` and `trash`. Built with TensorFlow/Keras using **transfer learning** on **EfficientNetB0** (pre-trained on ImageNet).
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white) ![Keras](https://img.shields.io/badge/Keras-D00000?logo=keras&logoColor=white)
 
-## Results
+> 🎓 Recruitment task for the **CyberTech** student research group (Wrocław University of Science and Technology)
 
-| | Accuracy |
-|---|---|
-| Validation, after phase 1 | ~0.89 |
-| Validation, after fine-tuning | ~0.91 |
-| **Test set** | **0.90** |
+A model that looks at a photo of a piece of waste and tells you which bin it goes in. 🗑️ It recognises 6 classes: cardboard 📦, glass 🍾, metal 🥫, paper 📄, plastic 🧴 and general trash.
 
-The notebook also plots the training curves and shows the classification report and confusion matrix for the test set. The weakest class is `trash`, which has the fewest examples.
+## 🎯 Result
 
-## How it works
+**90% accuracy on the test set** 🎉
 
-1. **Loading data** — images (224 × 224) from `dataset/train`, `dataset/valid` and `dataset/test`, in batches of 32.
-2. **Faster loading** — `cache()` + `prefetch()`, so every epoch after the first runs roughly twice as fast.
-3. **Augmentation** — random flips, rotation, zoom, contrast, brightness and shifts, so the model sees more varied images.
-4. **Phase 1** — EfficientNetB0 with frozen weights as the feature extractor, plus a new classification head (pooling, a 128-unit dense layer, dropout); trained for up to 15 epochs with early stopping.
-5. **Phase 2 — fine-tuning** — the last 30 layers of EfficientNetB0 are unfrozen and trained with a 10× lower learning rate (up to 20 epochs). The best model is saved to `best_model.keras`.
-6. **Evaluation** on the test set.
+## ✨ What I did
 
-## Dataset
+- 🧠 **Transfer learning** on **EfficientNetB0** (pre-trained on ImageNet) with my own classification head
+- 🔄 **Data augmentation** — random flips, rotation, zoom, contrast, brightness and shifts
+- 🔓 **Two-phase fine-tuning**: first only the new head is trained, then the last 30 layers of the network are unfrozen and trained with a 10× lower learning rate
+- ⚡ Faster data loading with `cache()` and `prefetch()` — later epochs run about twice as fast
+- 📊 Training curves, classification report and confusion matrix
 
-The images are **not** included in the repository (`dataset/` is in `.gitignore`). Put them in this layout — one subfolder per class:
+## 🛠️ Tech
 
-```
-dataset/
-├── train/   (1767 images)
-├── valid/   (504 images)
-└── test/    (253 images)
-    ├── cardboard/
-    ├── glass/
-    ├── metal/
-    ├── paper/
-    ├── plastic/
-    └── trash/
-```
+Python · TensorFlow / Keras · scikit-learn · Matplotlib · seaborn · Jupyter
 
-## Setting up the environment
+## 🚀 Run it
 
 ```bash
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-# Linux/macOS
-source .venv/bin/activate
-
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Then open `trash_sorting_model.ipynb` in Jupyter or VS Code and run all cells. Training is much faster on a GPU.
+The images aren't in the repo — put them in `dataset/train`, `dataset/valid` and `dataset/test` (one subfolder per class) and run `trash_sorting_model.ipynb`.

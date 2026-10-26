@@ -1,56 +1,35 @@
-**Polski** | [English](README.en.md)
+🇵🇱 **Polski** | 🇬🇧 [English](README.en.md)
 
-# Klasyfikacja śmieci z użyciem AI
+# ♻️ Klasyfikacja śmieci na podstawie zdjęć
 
-Model głębokiego uczenia, który na podstawie zdjęcia przypisuje odpad do jednej z **6 kategorii**: `cardboard` (karton), `glass` (szkło), `metal`, `paper` (papier), `plastic` (plastik) i `trash` (zmieszane). Zbudowany w TensorFlow/Keras z użyciem **transfer learningu** na modelu **EfficientNetB0** (wytrenowanym wcześniej na ImageNet).
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white) ![Keras](https://img.shields.io/badge/Keras-D00000?logo=keras&logoColor=white)
 
-## Wyniki
+> 🎓 Zadanie rekrutacyjne do koła naukowego **CyberTech** (Politechnika Wrocławska)
 
-| | Accuracy |
-|---|---|
-| Walidacja, po fazie 1 | ~0,89 |
-| Walidacja, po fine-tuningu | ~0,91 |
-| **Zbiór testowy** | **0,90** |
+Model, który patrzy na zdjęcie odpadu i mówi, gdzie go wyrzucić. 🗑️ Rozpoznaje 6 klas: karton 📦, szkło 🍾, metal 🥫, papier 📄, plastik 🧴 i odpady zmieszane.
 
-Notatnik pokazuje też wykresy przebiegu uczenia oraz raport klasyfikacji i macierz pomyłek dla zbioru testowego. Najsłabiej rozpoznawana jest klasa `trash`, która ma najmniej przykładów.
+## 🎯 Wynik
 
-## Jak to działa
+**90% accuracy na zbiorze testowym** 🎉
 
-1. **Wczytanie danych** — obrazy (224 × 224) z `dataset/train`, `dataset/valid` i `dataset/test`, w paczkach po 32.
-2. **Szybsze wczytywanie** — `cache()` + `prefetch()`, dzięki czemu każda epoka po pierwszej trwa mniej więcej o połowę krócej.
-3. **Augmentacja** — losowe odbicia, obroty, przybliżenia, zmiany kontrastu i jasności oraz przesunięcia, żeby model uczył się na bardziej zróżnicowanych obrazach.
-4. **Faza 1** — EfficientNetB0 z zamrożonymi wagami jako ekstraktor cech oraz nowa głowa klasyfikująca (pooling, warstwa gęsta 128 neuronów, dropout); trening do 15 epok z wczesnym zatrzymaniem.
-5. **Faza 2 — fine-tuning** — odmrożenie 30 ostatnich warstw EfficientNetB0 i dalszy trening z 10× mniejszym learning rate (do 20 epok). Najlepszy model zapisywany jest do `best_model.keras`.
-6. **Ocena** na zbiorze testowym.
+## ✨ Co zrobiłem
 
-## Zbiór danych
+- 🧠 **Transfer learning** na **EfficientNetB0** (wytrenowanym na ImageNet) z własną głową klasyfikującą
+- 🔄 **Augmentacja danych** — losowe odbicia, obroty, zoom, kontrast, jasność i przesunięcia
+- 🔓 **Fine-tuning** w dwóch fazach: najpierw trenuję tylko nową głowę, potem odmrażam 30 ostatnich warstw sieci i douczam z 10× mniejszym learning rate
+- ⚡ Szybsze wczytywanie danych dzięki `cache()` i `prefetch()` — kolejne epoki trwają ok. dwa razy krócej
+- 📊 Wykresy uczenia, raport klasyfikacji i macierz pomyłek
 
-Zdjęcia **nie są** dołączone do repozytorium (`dataset/` jest w `.gitignore`). Umieść je w takiej strukturze — jeden podfolder na klasę:
+## 🛠️ Technologie
 
-```
-dataset/
-├── train/   (1767 zdjęć)
-├── valid/   (504 zdjęcia)
-└── test/    (253 zdjęcia)
-    ├── cardboard/
-    ├── glass/
-    ├── metal/
-    ├── paper/
-    ├── plastic/
-    └── trash/
-```
+Python · TensorFlow / Keras · scikit-learn · Matplotlib · seaborn · Jupyter
 
-## Odtworzenie środowiska
+## 🚀 Uruchomienie
 
 ```bash
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-# Linux/macOS
-source .venv/bin/activate
-
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Następnie otwórz `trash_sorting_model.ipynb` w Jupyterze lub VS Code i uruchom wszystkie komórki. Trening jest znacznie szybszy na GPU.
+Zdjęcia nie są w repo — umieść je w `dataset/train`, `dataset/valid` i `dataset/test` (po jednym podfolderze na klasę) i uruchom `trash_sorting_model.ipynb`.
