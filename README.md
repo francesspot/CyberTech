@@ -6,19 +6,19 @@
 
 > 🎓 Zadanie rekrutacyjne do koła naukowego **CyberTech** (Politechnika Wrocławska)
 
-Model, który patrzy na zdjęcie odpadu i mówi, gdzie go wyrzucić. 🗑️ Rozpoznaje 6 klas: karton 📦, szkło 🍾, metal 🥫, papier 📄, plastik 🧴 i odpady zmieszane.
+Model klasyfikujący odpady na podstawie zdjęcia do jednej z 6 klas: karton, szkło, metal, papier, plastik i odpady zmieszane.
 
 ## 🎯 Wynik
 
-**90% accuracy na zbiorze testowym** 🎉
+**90% accuracy na zbiorze testowym**
 
 ## ✨ Co zrobiłem
 
-- 🧠 **Transfer learning** na **EfficientNetB0** (wytrenowanym na ImageNet) z własną głową klasyfikującą
-- 🔄 **Augmentacja danych** — losowe odbicia, obroty, zoom, kontrast, jasność i przesunięcia
-- 🔓 **Fine-tuning** w dwóch fazach: najpierw trenuję tylko nową głowę, potem odmrażam 30 ostatnich warstw sieci i douczam z 10× mniejszym learning rate
-- ⚡ Szybsze wczytywanie danych dzięki `cache()` i `prefetch()` — kolejne epoki trwają ok. dwa razy krócej
-- 📊 Wykresy uczenia, raport klasyfikacji i macierz pomyłek
+- **Transfer learning** na **EfficientNetB0** (wytrenowanym na ImageNet) z własną głową klasyfikującą
+- **Augmentacja danych** — losowe odbicia, obroty, zoom, kontrast, jasność i przesunięcia
+- **Fine-tuning** w dwóch fazach: najpierw trenuję tylko nową głowę, potem odmrażam 30 ostatnich warstw sieci i douczam z 10× mniejszym learning rate
+- Szybsze wczytywanie danych dzięki `cache()` i `prefetch()` — kolejne epoki trwają ok. dwa razy krócej
+- Wykresy uczenia, raport klasyfikacji i macierz pomyłek
 
 ## 🛠️ Technologie
 
@@ -32,4 +32,4 @@ source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Zdjęcia nie są w repo — umieść je w `dataset/train`, `dataset/valid` i `dataset/test` (po jednym podfolderze na klasę) i uruchom `trash_sorting_model.ipynb`.
+Zdjęcia nie są dołączone do repozytorium — umieść je w `dataset/train`, `dataset/valid` i `dataset/test` (po jednym podfolderze na klasę) i uruchom `trash_sorting_model.ipynb`.

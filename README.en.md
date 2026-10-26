@@ -6,19 +6,19 @@
 
 > 🎓 Recruitment task for the **CyberTech** student research group (Wrocław University of Science and Technology)
 
-A model that looks at a photo of a piece of waste and tells you which bin it goes in. 🗑️ It recognises 6 classes: cardboard 📦, glass 🍾, metal 🥫, paper 📄, plastic 🧴 and general trash.
+A model that classifies waste from a photo into one of 6 classes: cardboard, glass, metal, paper, plastic and general trash.
 
 ## 🎯 Result
 
-**90% accuracy on the test set** 🎉
+**90% accuracy on the test set**
 
 ## ✨ What I did
 
-- 🧠 **Transfer learning** on **EfficientNetB0** (pre-trained on ImageNet) with my own classification head
-- 🔄 **Data augmentation** — random flips, rotation, zoom, contrast, brightness and shifts
-- 🔓 **Two-phase fine-tuning**: first only the new head is trained, then the last 30 layers of the network are unfrozen and trained with a 10× lower learning rate
-- ⚡ Faster data loading with `cache()` and `prefetch()` — later epochs run about twice as fast
-- 📊 Training curves, classification report and confusion matrix
+- **Transfer learning** on **EfficientNetB0** (pre-trained on ImageNet) with my own classification head
+- **Data augmentation** — random flips, rotation, zoom, contrast, brightness and shifts
+- **Two-phase fine-tuning**: first only the new head is trained, then the last 30 layers of the network are unfrozen and trained with a 10× lower learning rate
+- Faster data loading with `cache()` and `prefetch()` — later epochs run about twice as fast
+- Training curves, classification report and confusion matrix
 
 ## 🛠️ Tech
 
